@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2021-11-20--01--init-db-schema.xml" author="WebWelle32">
+
+        <createTable tableName="drivers">
+            <column name="id" type="UUID" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="license_number" type="VARCHAR(9)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="experience" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="cars">
+            <column name="id" type="UUID" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="color" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="VARCHAR(9)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="year" type="VARCHAR(4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_id" type="uuid">
+                <constraints foreignKeyName="fk_driver_id" nullable="false" references="drivers(id)"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
+
