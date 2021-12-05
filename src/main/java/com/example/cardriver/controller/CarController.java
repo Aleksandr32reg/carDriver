@@ -14,23 +14,23 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/controllerCars/")
+@RequestMapping("/car")
 public class CarController {
     private final CarService carService;
 
-    @GetMapping("/cars/all")
+    @GetMapping("/all")
     public List<CarDto> getAllCars(){
         return carService.getAllCars();
     }
-    @GetMapping("/car/{id}")
+    @GetMapping("/{id}")
     public CarDto getCarById(@PathVariable("id") UUID id) {
         return carService.getCarById(id);
     }
 
-    @PostMapping("/car/create")
+    @PostMapping("/create")
     public CarEntity createCar(@RequestBody CarDto carDto) {
         return carService.createCar(carDto);
     }
-    @PostMapping("/car/update")
-    public CarEntity updateCar(@RequestBody UUID id, @RequestBody CarDto carDto) { return carService.updateCar(id,carDto); }
+    @PostMapping("/update/{id}")
+    public CarEntity updateCar(@PathVariable("id") UUID id, @RequestBody CarDto carDto) { return carService.updateCar(id,carDto); }
 }

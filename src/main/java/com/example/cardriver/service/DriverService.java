@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,6 +28,14 @@ public class DriverService {
         return mapper.toDto(getDriverEntityById(id));
     }
 
+    public DriverDto getDriverByLicense(String license) {
+        Optional<DriverEntity> byLicenseNumber = repository.findByLicenseNumber(license);
+        if(byLicenseNumber.isEmpty()){
+            throw new EntityNotFoundException("driver is not found");
+        }
+        return mapper.toDto(byLicenseNumber.get());
+    }
+    
     public DriverEntity createDriver(DriverDto dto) {
         return repository.save(mapper.toEntity(dto));
     }

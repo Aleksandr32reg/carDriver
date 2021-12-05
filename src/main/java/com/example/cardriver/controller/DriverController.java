@@ -13,17 +13,22 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/controllerDrivers")
+@RequestMapping("/driver")
 public class DriverController {
     private final DriverService driverService;
 
-    @GetMapping("/drivers/all")
+    @GetMapping
     public List<DriverDto> getAllDrivers() { return driverService.getAllDrivers(); }
-    @GetMapping("/driver/{id}")
+    @GetMapping("/{id}")
     public DriverDto getDriverById(@PathVariable("id") UUID id) { return driverService.getDriverById(id); }
 
-    @PostMapping("/driver/create")
+    @GetMapping("/license/{license}")
+    public DriverDto getDriverByLicense(@PathVariable("license") String license) { return driverService.getDriverByLicense(license); }
+
+    @PostMapping("/create")
     public DriverEntity createDriver(@RequestBody DriverDto dto) { return driverService.createDriver(dto); }
-    @PostMapping("/driver/update")
-    public DriverEntity updateDriver(@RequestBody UUID id, @RequestBody DriverDto dto) { return driverService.updateDriver(id, dto); }
+
+    //One object
+    @PutMapping("/update/{id}")
+    public DriverEntity updateDriver(@PathVariable("id") UUID id, @RequestBody DriverDto dto) { return driverService.updateDriver(id, dto); }
 }
