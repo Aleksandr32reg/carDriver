@@ -22,6 +22,7 @@ public class CarController {
     public List<CarDto> getAllCars(){
         return carService.getAllCars();
     }
+
     @GetMapping("/{id}")
     public CarDto getCarById(@PathVariable("id") UUID id) {
         return carService.getCarById(id);
@@ -31,6 +32,6 @@ public class CarController {
     public CarEntity createCar(@RequestBody CarDto carDto) {
         return carService.createCar(carDto);
     }
-    @PostMapping("/update/{id}")
+    @PostMapping("/update/{id}") //PUT? нафиг id?
     public CarEntity updateCar(@PathVariable("id") UUID id, @RequestBody CarDto carDto) { return carService.updateCar(id,carDto); }
 }

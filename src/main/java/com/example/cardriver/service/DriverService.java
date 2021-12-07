@@ -40,6 +40,7 @@ public class DriverService {
         return repository.save(mapper.toEntity(dto));
     }
 
+    //mapper
     public DriverEntity updateDriver(UUID id, DriverDto dto) {
         DriverEntity driver = getDriverEntityById(id);
         driver.setFirstName(dto.getFirstName());
@@ -55,7 +56,7 @@ public class DriverService {
         Optional<DriverEntity> optionalDriver = repository.findById(id);
         if (optionalDriver.isEmpty()) {
             log.error("getDriverById.out - Driver with ID {} not found", id);
-            //throw new DriverNotFoundException(String.format("Driver with id %s not found", id));
+            //throw new DriverNotFoundException(String.format("Driver with id %s not found", id)); //?
         }
         return optionalDriver.get();
     }

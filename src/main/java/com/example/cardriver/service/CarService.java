@@ -32,6 +32,7 @@ public class CarService {
         return repository.save(mapper.toEntity(dto));
     }
 
+    //mapper??
     public CarEntity updateCar(UUID id, CarDto dto) {
         CarEntity car = getCarEntityById(id);
         car.setNumber(dto.getNumber());
@@ -46,7 +47,7 @@ public class CarService {
         Optional<CarEntity> optionalDriver = repository.findById(id);
         if (optionalDriver.isEmpty()) {
             log.error("getDriverById.out - car with ID {} not found", id);
-            //throw new DriverNotFoundException(String.format("car with id %s not found", id));
+            //throw new DriverNotFoundException(String.format("car with id %s not found", id)); //почему закомменчено?
         }
         return optionalDriver.get();
     }

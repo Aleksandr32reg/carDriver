@@ -25,6 +25,6 @@ public class DriverEntity extends BaseEntity {
     private Category category;
 
 
-    @OneToMany
+    @OneToMany // никаких каскадов лейзи, ничо не надо?
     private List<CarEntity> cars;
 }
