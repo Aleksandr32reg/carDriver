@@ -20,5 +20,5 @@ public class DriverDto {
     private String licenseNumber;
     private Integer drivingExp;
     private Category category;
-    private List<CarEntity> cars;
+    //private List<CarEntity> cars;
 }

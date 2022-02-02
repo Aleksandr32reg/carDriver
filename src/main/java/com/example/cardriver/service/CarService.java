@@ -8,6 +8,7 @@ import com.example.cardriver.mapper.CarMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,26 +29,25 @@ public class CarService {
         return mapper.toDto(getCarEntityById(id));
     }
 
-    public CarEntity createCar(CarDto dto) {
-        return repository.save(mapper.toEntity(dto));
+    @Transactional
+    public CarDto createCar(CarDto dto) {
+        CarEntity createCar = repository.save(mapper.toEntity(dto));
+        CarDto carDto = mapper.toDto(createCar);
+        return carDto;
     }
 
-    public CarEntity updateCar(UUID id, CarDto dto) {
+    @Transactional
+    public CarDto updateCar(UUID id, CarDto dto) {
         CarEntity car = getCarEntityById(id);
-        car.setNumber(dto.getNumber());
-        car.setModel(dto.getModel());
-        car.setColor(dto.getColor());
-        car.setYear(dto.getYear());
-        car.setCategory(dto.getCategory());
-        return repository.save(car);
+        CarEntity carUpdated = mapper.updateFromDto(dto, car);
+        CarEntity carUpdatedPersisted = repository.save(carUpdated);
+        return mapper.toDto(carUpdatedPersisted);
     }
 
     public CarEntity getCarEntityById(UUID id) {
-        Optional<CarEntity> optionalDriver = repository.findById(id);
-        if (optionalDriver.isEmpty()) {
-            log.error("getDriverById.out - car with ID {} not found", id);
-            //throw new DriverNotFoundException(String.format("car with id %s not found", id));
-        }
-        return optionalDriver.get();
+        return repository.findById(id).orElseThrow(() -> {
+            log.error("getCarById.out - dtp with ID {} not found", id);
+            throw new RuntimeException(String.format("car with id %s not found", id));
+        });
     }
 }

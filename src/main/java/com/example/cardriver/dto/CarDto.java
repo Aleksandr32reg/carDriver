@@ -20,6 +20,8 @@ import java.time.LocalDate;
 public class CarDto {
 
     private String model;
+    @Pattern(regexp = "^[АВЕКМНОРСТУХ]\\d{3}(?<!000)[АВЕКМНОРСТУХ]{2}\\d{2,3}$", message = "" +
+            "Должно соответветстовать формату гос. знака РФ. А123БВ32")
     private String number;
     private String color;
     private String year;

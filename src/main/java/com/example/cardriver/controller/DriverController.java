@@ -17,18 +17,28 @@ import java.util.UUID;
 public class DriverController {
     private final DriverService driverService;
 
-    @GetMapping
-    public List<DriverDto> getAllDrivers() { return driverService.getAllDrivers(); }
+    @GetMapping("/all")
+    public List<DriverDto> getAllDrivers() {
+        return driverService.getAllDrivers();
+    }
+
     @GetMapping("/{id}")
-    public DriverDto getDriverById(@PathVariable("id") UUID id) { return driverService.getDriverById(id); }
+    public DriverDto getDriverById(@PathVariable("id") UUID id) {
+        return driverService.getDriverById(id);
+    }
 
     @GetMapping("/license/{license}")
-    public DriverDto getDriverByLicense(@PathVariable("license") String license) { return driverService.getDriverByLicense(license); }
+    public DriverDto getDriverByLicense(@PathVariable("license") String license) {
+        return driverService.getDriverByLicense(license);
+    }
 
     @PostMapping("/create")
-    public DriverEntity createDriver(@RequestBody DriverDto dto) { return driverService.createDriver(dto); }
+    public DriverDto createDriver(@RequestBody DriverDto dto) {
+        return driverService.createDriver(dto);
+    }
 
-    //One object
     @PutMapping("/update/{id}")
-    public DriverEntity updateDriver(@PathVariable("id") UUID id, @RequestBody DriverDto dto) { return driverService.updateDriver(id, dto); }
+    public DriverDto updateDriver(@PathVariable("id") UUID id, @RequestBody DriverDto dto) {
+        return driverService.updateDriver(id, dto);
+    }
 }

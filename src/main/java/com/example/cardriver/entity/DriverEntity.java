@@ -4,9 +4,7 @@ package com.example.cardriver.entity;
 import com.example.cardriver.enums.Category;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Builder
@@ -14,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "driver")
+@Entity(name = "drivers")
 public class DriverEntity extends BaseEntity {
 
     private String firstName;
@@ -23,8 +21,7 @@ public class DriverEntity extends BaseEntity {
     private String licenseNumber;
     private Integer drivingExp;
     private Category category;
-
-
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = false)
+    @JoinColumn(name = "driver")
     private List<CarEntity> cars;
 }

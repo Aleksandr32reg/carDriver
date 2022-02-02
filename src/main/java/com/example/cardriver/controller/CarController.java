@@ -22,15 +22,19 @@ public class CarController {
     public List<CarDto> getAllCars(){
         return carService.getAllCars();
     }
+
     @GetMapping("/{id}")
     public CarDto getCarById(@PathVariable("id") UUID id) {
         return carService.getCarById(id);
     }
 
     @PostMapping("/create")
-    public CarEntity createCar(@RequestBody CarDto carDto) {
+    public CarDto createCar(@RequestBody CarDto carDto) {
         return carService.createCar(carDto);
     }
-    @PostMapping("/update/{id}")
-    public CarEntity updateCar(@PathVariable("id") UUID id, @RequestBody CarDto carDto) { return carService.updateCar(id,carDto); }
+
+    @PutMapping("/update/{id}")
+    public CarDto updateCar(@PathVariable("id") UUID id, @RequestBody CarDto carDto) {
+        return carService.updateCar(id,carDto);
+    }
 }

@@ -8,4 +8,4 @@ spring:
     username: postgres
     password: webwelle32
 server:
-  port: 8399
+  port: 4210

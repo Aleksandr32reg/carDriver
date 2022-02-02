@@ -21,4 +21,8 @@ public class CarEntity extends BaseEntity {
     private String year;
     private Category category;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "driver")
+    private DriverEntity driver;
+
 }
