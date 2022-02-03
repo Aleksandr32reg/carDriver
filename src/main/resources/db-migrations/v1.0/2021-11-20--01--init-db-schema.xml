@@ -60,7 +60,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="driver" type="UUID">
-                <constraints foreignKeyName="fk_driver" nullable="false" references="drivers(id)"/>
+                <constraints foreignKeyName="fk_driver" nullable="true" references="drivers(id)"/>
             </column>
         </createTable>
 
