@@ -1,6 +1,7 @@
 package com.example.cardriver.dto;
 
 import com.example.cardriver.entity.CarEntity;
+import com.example.cardriver.entity.DriverEntity;
 import com.example.cardriver.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -26,4 +28,5 @@ public class CarDto {
     private String color;
     private String year;
     private Category category;
+    private String driver;
 }
